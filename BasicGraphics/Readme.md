@@ -28,7 +28,7 @@ iOS基本图形绘制, 包括: 线, 弧线, 三角形, 椭圆, 矩形, 圆角矩
 背景色为黑色, 需设置状态栏(显示信号, 时间, 电量等)为亮色, 有两种方法:  
 1. Info.plist添加View controller-based status bar appearance, 设置value为NO. 添加    
 ```
-[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];  
 ```  
 
 2. ViewController.m中实现 - (UIStatusBarStyle) preferredStatusBarStyle 方法     
