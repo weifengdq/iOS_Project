@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "AFNetworking.h"
+#import "HomeTLViewController.h"
 
 //appkey
 #define APP_KEY @"3901934763"
@@ -20,7 +21,9 @@
  *******************************************/
 
 @interface ViewController ()<UIWebViewDelegate>
-
+{
+    NSString *_access_token;
+}
 @end
 
 @implementation ViewController
@@ -130,7 +133,14 @@
                         uid = 3193061857;
                    }
                    **************************/
+                  NSDictionary *dic = [[NSDictionary alloc] init];
+                  dic = (NSDictionary *)responseObject;
+                  //取出access_token  只在第一次登录时才能获取
+                  _access_token = [dic objectForKey:@"access_token"];
                   
+                  //NSLog(@"_access_token = %@", _access_token);
+                  
+                  //别忘了同步
               }
               failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                   
@@ -146,6 +156,23 @@
     
     return YES;
 }
+
+
+
+#pragma mark - home_timeline
+- (IBAction)homeTimeLineAction:(id)sender {
+    HomeTLViewController *vc = [[HomeTLViewController alloc] init];
+    
+    //属性传值
+    vc.access_token = _access_token;
+    
+    //NSLog(@"access_token = %@", vc.access_token);
+    
+    //模态弹出
+    [self presentViewController:vc animated:YES completion:nil];
+    
+}
+
 
 @end
 
