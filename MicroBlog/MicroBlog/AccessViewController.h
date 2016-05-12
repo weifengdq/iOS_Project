@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface AccessViewController : UIViewController
 
+@property(nonatomic, copy)NSString *access_token;
 
 @end
 

@@ -6,7 +6,7 @@
 //  Copyright © 2016 weifengdq. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "AccessViewController.h"
 #import "AFNetworking.h"
 #import "HomeTLViewController.h"
 
@@ -20,23 +20,31 @@
  App Secret：38230743694a66180a3ceecbc5873211
  *******************************************/
 
-@interface ViewController ()<UIWebViewDelegate>
-{
-    NSString *_access_token;
-}
+@interface AccessViewController ()<UIWebViewDelegate>
+
 @end
 
-@implementation ViewController
+@implementation AccessViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+//    //获取授权按钮
+//    self.view.backgroundColor = [UIColor redColor];
+//    // Do any additional setup after loading the view.
+//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    btn.backgroundColor = [UIColor blackColor];
+//    btn.frame = CGRectMake(0, 50, 200, 200);
+//    [btn setTitle:@"aa" forState:UIControlStateNormal];
+//    [btn addTarget:self action:@selector(requestAction) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:btn];
     
+    [self requestAction];
 }
 
 
 #pragma mark - 请求授权响应
-- (IBAction)requestAction:(id)sender {
+- (void)requestAction {
     //请求授权--------------------------------------------------------
     
     //Doc: http://open.weibo.com/wiki/Oauth2/authorize
@@ -136,9 +144,10 @@
                   NSDictionary *dic = [[NSDictionary alloc] init];
                   dic = (NSDictionary *)responseObject;
                   //取出access_token  只在第一次登录时才能获取
-                  _access_token = [dic objectForKey:@"access_token"];
+                  self.access_token = [dic objectForKey:@"access_token"];
                   
-                  //NSLog(@"_access_token = %@", _access_token);
+                  
+                  NSLog(@"_access_token = %@", self.access_token);
                   
                   //别忘了同步
               }
@@ -157,21 +166,6 @@
     return YES;
 }
 
-
-
-#pragma mark - home_timeline
-- (IBAction)homeTimeLineAction:(id)sender {
-    HomeTLViewController *vc = [[HomeTLViewController alloc] init];
-    
-    //属性传值
-    vc.access_token = _access_token;
-    
-    //NSLog(@"access_token = %@", vc.access_token);
-    
-    //模态弹出
-    [self presentViewController:vc animated:YES completion:nil];
-    
-}
 
 
 @end

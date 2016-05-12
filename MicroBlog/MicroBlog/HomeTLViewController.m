@@ -17,11 +17,6 @@
     NSMutableArray *dataArr;
 }
 
-@property (weak, nonatomic) IBOutlet UIImageView *headIcon;
-@property (weak, nonatomic) IBOutlet UILabel *userName;
-@property (weak, nonatomic) IBOutlet UILabel *contentText;
-@property (weak, nonatomic) IBOutlet UIImageView *showImage;
-
 @end
 
 @implementation HomeTLViewController
